@@ -1,5 +1,7 @@
 FROM ruby:alpine
-RUN apk add build-base && rm -rf /var/cache/apk/*
-RUN gem install rails-erb-lint
+RUN apk --update add build-base && \
+    gem install rails-erb-lint && \
+    apk del build-base && \
+    rm -rf /var/cache/apk/*
 WORKDIR /lint
 ENTRYPOINT ["rails-erb-lint"]
